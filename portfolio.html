@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atugonza Louis-Marie | CS Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #07070f;
+      --s1:       #0d0d1a;
+      --s2:       #111122;
+      --border:   #1a1a2e;
+      --border2:  #242438;
+      --acc:      #7b68ee;
+      --acc2:     #b0a3ff;
+      --green:    #4ade80;
+      --text:     #eeeef5;
+      --text2:    #9494b0;
+      --text3:    #52526a;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Inter', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* GLOWS */
+    .glows { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .g { position: absolute; border-radius: 50%; filter: blur(110px); }
+    .g1 { width: 700px; height: 700px; background: #5b4fe0; opacity: 0.055; top: -200px; left: -200px; }
+    .g2 { width: 500px; height: 500px; background: #4ade80; opacity: 0.04; bottom: 0; right: -150px; }
+    .g3 { width: 350px; height: 350px; background: #b0a3ff; opacity: 0.035; top: 45%; left: 45%; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 4rem;
+      background: rgba(7,7,15,0.8);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--acc2); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--text3); text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text3);
+      background: var(--s1); border: 1px solid var(--border); border-radius: 100px;
+      padding: 0.3rem 0.8rem;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* HERO */
+    #hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      max-width: 1100px; margin: 0 auto;
+      padding: 9rem 4rem 5rem;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center;
+    }
+    .h-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.68rem; color: var(--acc);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid rgba(123,104,238,0.3); border-radius: 100px;
+      padding: 0.3rem 0.9rem; background: rgba(123,104,238,0.06);
+      margin-bottom: 2rem;
+    }
+    .h-name {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.2rem;
+    }
+    .h-name em {
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(130deg, var(--acc), var(--acc2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .h-role { font-size: 0.9rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.8rem; }
+    .h-bio { font-size: 0.95rem; color: var(--text3); line-height: 1.9; max-width: 480px; margin-bottom: 2.5rem; }
+    .h-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.65rem 1.5rem; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: 1px solid transparent; cursor: pointer;
+      font-family: var(--sans);
+    }
+    .btn-p { background: var(--acc); color: #fff; }
+    .btn-p:hover { background: #6a58d6; transform: translateY(-1px); }
+    .btn-g { background: transparent; color: var(--text2); border-color: var(--border2); }
+    .btn-g:hover { border-color: var(--acc); color: var(--acc2); }
+
+    /* HERO CARD */
+    .h-card-wrap { display: flex; justify-content: center; align-items: center; }
+    .h-card {
+      width: 300px;
+      background: var(--s1); border: 1px solid var(--border2); border-radius: 16px;
+      padding: 2.5rem 2rem; text-align: center; position: relative;
+      background: linear-gradient(145deg, var(--s1), rgba(123,104,238,0.05));
+    }
+    .h-avatar {
+      width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 1.2rem;
+      background: linear-gradient(135deg, var(--acc), var(--acc2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 2rem; color: #fff; font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+    .h-card-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .h-card-title { font-size: 0.75rem; color: var(--text3); font-family: var(--mono); margin-bottom: 1.8rem; }
+    .h-stats { display: flex; flex-direction: column; gap: 0.7rem; text-align: left; }
+    .h-stat {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 0.8rem; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+      font-size: 0.75rem;
+    }
+    .h-stat-label { color: var(--text3); font-family: var(--mono); }
+    .h-stat-val { color: var(--acc2); font-family: var(--mono); font-weight: 500; }
+    .h-badge {
+      position: absolute; font-family: var(--mono); font-size: 0.68rem;
+      background: var(--s2); border: 1px solid var(--border2); border-radius: 6px;
+      padding: 0.4rem 0.7rem; color: var(--text2); white-space: nowrap;
+    }
+    .b1 { top: -12px; right: -20px; color: var(--green); }
+    .b2 { bottom: 40px; left: -30px; }
+
+    /* LAYOUT WRAPPER */
+    .wrap { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 0 4rem; }
+    hr.div { border: none; border-top: 1px solid var(--border); margin: 0 4rem; }
+
+    /* SECTIONS */
+    .sec { padding: 5.5rem 0; }
+    .sec-eye { font-family: var(--mono); font-size: 0.68rem; color: var(--acc); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .sec-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 0.7rem; }
+    .sec-sub { font-size: 0.88rem; color: var(--text3); max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--text2); font-size: 0.93rem; line-height: 1.9; margin-bottom: 1.3rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    .facts { display: flex; flex-direction: column; gap: 0.8rem; }
+    .fact {
+      padding: 0.9rem 1.1rem; background: var(--s1); border: 1px solid var(--border); border-radius: 8px;
+    }
+    .fact-l { font-family: var(--mono); font-size: 0.62rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .fact-v { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+    .fact-v.a { color: var(--acc2); font-family: var(--mono); }
+
+    /* EDUCATION */
+    .edu-list { display: flex; flex-direction: column; }
+    .edu-item {
+      display: grid; grid-template-columns: 160px 1fr; gap: 2.5rem;
+      padding: 2.5rem 0; border-bottom: 1px solid var(--border);
+    }
+    .edu-item:first-child { padding-top: 0; }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-period { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); padding-top: 0.2rem; line-height: 1.6; }
+    .edu-badge { font-family: var(--mono); font-size: 0.62rem; color: var(--acc); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .edu-degree { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .edu-school { font-size: 0.82rem; color: var(--acc2); margin-bottom: 0.7rem; }
+    .edu-desc { font-size: 0.85rem; color: var(--text3); line-height: 1.75; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.8rem; }
+    .tag { font-family: var(--mono); font-size: 0.62rem; color: var(--text3); background: var(--s1); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 3px; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .sk-card { background: var(--s1); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; transition: border-color 0.2s, transform 0.2s; }
+    .sk-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .sk-icon { font-size: 1.3rem; margin-bottom: 0.7rem; }
+    .sk-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .sk-desc { font-size: 0.75rem; color: var(--text3); line-height: 1.5; margin-bottom: 0.9rem; }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .sk-tag { font-family: var(--mono); font-size: 0.62rem; color: var(--text3); background: var(--bg); border: 1px solid var(--border); padding: 0.18rem 0.5rem; border-radius: 3px; }
+
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .proj-card {
+      background: var(--s1); border: 1px solid var(--border); border-radius: 10px; padding: 1.8rem;
+      display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s;
+    }
+    .proj-card:hover { border-color: rgba(123,104,238,0.4); transform: translateY(-2px); }
+    .proj-card.feat {
+      grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center;
+      background: linear-gradient(135deg, var(--s1) 0%, rgba(123,104,238,0.06) 100%);
+      border-color: rgba(123,104,238,0.25);
+    }
+    .proj-cat { font-family: var(--mono); font-size: 0.62rem; color: var(--acc); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .proj-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin-bottom: 0.7rem; line-height: 1.2; }
+    .proj-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.8; flex: 1; margin-bottom: 1.2rem; }
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .ps { font-family: var(--mono); font-size: 0.62rem; color: var(--text3); background: var(--bg); border: 1px solid var(--border2); padding: 0.18rem 0.5rem; border-radius: 3px; }
+    .feat-viz {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.3rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text3); line-height: 2;
+    }
+    .fv-row { display: flex; align-items: center; gap: 0.5rem; }
+    .fv-d { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .fv-g { background: var(--green); box-shadow: 0 0 5px var(--green); }
+    .fv-p { background: var(--acc); box-shadow: 0 0 5px var(--acc); }
+    .fv-dim { background: var(--text3); }
+
+    /* CERTIFICATIONS */
+    .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .cert-card {
+      background: var(--s1); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.5rem; position: relative; overflow: hidden;
+    }
+    .cert-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+    .cert-card.c1::after { background: var(--green); }
+    .cert-card.c2::after { background: var(--acc); }
+    .cert-card.c3::after { background: var(--acc2); }
+    .cert-phase { font-family: var(--mono); font-size: 0.62rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .cert-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .cert-time { font-family: var(--mono); font-size: 0.7rem; margin-bottom: 1rem; }
+    .c1 .cert-time { color: var(--green); }
+    .c2 .cert-time { color: var(--acc); }
+    .c3 .cert-time { color: var(--acc2); }
+    .cert-items { display: flex; flex-direction: column; gap: 0.4rem; }
+    .ci { font-size: 0.8rem; color: var(--text2); display: flex; align-items: center; gap: 0.5rem; }
+    .ci::before { content: '—'; color: var(--text3); flex-shrink: 0; }
+
+    /* INTERESTS */
+    .int-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .int-card { background: var(--s1); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: border-color 0.2s; }
+    .int-card:hover { border-color: var(--border2); }
+    .int-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+    .int-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .int-desc { font-size: 0.8rem; color: var(--text3); line-height: 1.65; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-text p { font-size: 0.92rem; color: var(--text2); line-height: 1.85; margin-bottom: 1rem; }
+    .contact-text p:last-child { margin-bottom: 0; color: var(--text3); font-size: 0.82rem; }
+    .c-links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .c-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--s1); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.9rem 1.1rem; text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .c-link:hover { border-color: var(--acc); transform: translateX(4px); }
+    .c-ico { width: 34px; height: 34px; background: var(--bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .c-info strong { display: block; font-size: 0.82rem; font-weight: 500; }
+    .c-info span { font-size: 0.72rem; color: var(--text3); font-family: var(--mono); }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 1.8rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-pill { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+      .h-card-wrap { order: -1; }
+      .h-card { width: 260px; }
+      .wrap { padding: 0 1.5rem; }
+      hr.div { margin: 0 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card.feat { grid-template-columns: 1fr; }
+      .feat-viz { display: none; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .int-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 0.4rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glows">
+  <div class="g g1"></div>
+  <div class="g g2"></div>
+  <div class="g g3"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">ALM · 74</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-pill"><span class="dot"></span> Available · Mukono, UG</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="h-tag"> Portfolio 2026</div>
+    <h1 class="h-name">Atugonza<br><em>Louis-Marie</em></h1>
+    <p class="h-role">BSc Computer Science · Uganda Christian University<br>Year 1 · Semester 2 · Student ID: S25B23/060</p>
+    <p class="h-bio">I build networks, write algorithms, and document everything rigorously. Hands-on, precise, and targeting first-class honours. My work lives in Cisco labs, Python scripts, and LaTeX reports.</p>
+    <div class="h-btns">
+      <a href="#projects" class="btn btn-p">View My Work →</a>
+      <a href="https://www.linkedin.com/in/louis-marie-atugonza-271144408" target="_blank" class="btn btn-g">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="h-card-wrap">
+    <div class="h-card">
+      <div class="h-avatar">ALM</div>
+      <div class="h-card-name">Atugonza Louis-Marie</div>
+      <div class="h-card-title">CS Student · UCU · 2025–Present</div>
+      <div class="h-stats">
+        <div class="h-stat"><span class="h-stat-label">Target CGPA</span><span class="h-stat-val">4.4</span></div>
+        <div class="h-stat"><span class="h-stat-label">Year</span><span class="h-stat-val">1 of 3</span></div>
+        <div class="h-stat"><span class="h-stat-label">Focus</span><span class="h-stat-val">Growth </span></div>
+        <div class="h-stat"><span class="h-stat-label">Location</span><span class="h-stat-val">Mukono, UG</span></div>
+      </div>
+      <div class="h-badge b1">Open to opportunities</div>
+      <div class="h-badge b2">UCU · First Class target</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ABOUT -->
+<div class="wrap">
+  <div id="about" class="sec">
+    <p class="sec-eye">Background</p>
+    <h2 class="sec-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm Louis ,a Computer Science student at Uganda Christian University in Mukono, currently in Year 1, Semester 2. My academic foundation spans <strong>networking, data structures and algorithms, database design, discrete mathematics, and computer architecture</strong>. I don't just study these , I try to implement them in labs, on real Cisco hardware, in Python, and in formal LaTeX reports.</p>
+        <p>My approach to learning is deliberate and methodical. I believe <strong>documentation is as important as the technical work itself</strong> every project I complete has a proper writeup, diagram, or report attached to it. I've configured enterprise networks from CLI, implemented data structures from scratch, and presented technical work formally.</p>
+        <p>Outside academics, I'm  disciplined ,I play football interact with friends and family. I have a genuine interest in people working with children, helping where I can, and understanding human behaviour. I'm reserved by nature, but precise and clear when it counts.</p>
+        <p>I have a <strong>3-year professional certification roadmap</strong> already mapped out  starting with CompTIA A+ and the Google IT Support Certificate and progressing toward a mid-level industry credential by graduation.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><div class="fact-l">Institution</div><div class="fact-v">Uganda Christian University</div></div>
+        <div class="fact"><div class="fact-l">Programme</div><div class="fact-v">BSc Computer Science</div></div>
+        <div class="fact"><div class="fact-l">Year / Semester</div><div class="fact-v">Year 1 · Semester 2</div></div>
+        <div class="fact"><div class="fact-l">Student ID</div><div class="fact-v a">S25B23/060</div></div>
+        <div class="fact"><div class="fact-l">Target CGPA</div><div class="fact-v a">4.4 — First Class</div></div>
+        <div class="fact"><div class="fact-l">Location</div><div class="fact-v">Mukono, Uganda</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- EDUCATION -->
+<div class="wrap">
+  <div id="education" class="sec">
+    <p class="sec-eye">Academic History</p>
+    <h2 class="sec-title">Education</h2>
+    <p class="sec-sub">A consistent academic trajectory from O-Level through university, with professional development running alongside coursework.</p>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <div class="edu-period">2025 —<br>Present</div>
+        <div>
+          <p class="edu-badge">University · Current</p>
+          <p class="edu-degree">BSc Computer Science</p>
+          <p class="edu-school">Uganda Christian University — Mukono, Uganda</p>
+          <p class="edu-desc">Comprehensive first-year curriculum spanning both theoretical and applied computing. Strong performance in Computer Organisation & Architecture and Discrete Mathematics. Participating in Trinity Workshop Programmes for professional development beyond standard coursework.</p>
+          <div class="tags">
+            <span class="tag">Data Structures & Algorithms</span>
+            <span class="tag">Database Design</span>
+            <span class="tag">Discrete Mathematics</span>
+            <span class="tag">Computer Organisation & Architecture</span>
+            <span class="tag">Local Area Networks (ICT1206)</span>
+            <span class="tag">IT Skills</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">2026</div>
+        <div>
+          <p class="edu-badge">Professional Development</p>
+          <p class="edu-degree">Trinity Workshop Programme 2026</p>
+          <p class="edu-school">Uganda Christian University</p>
+          <p class="edu-desc">Structured professional development including SolidWorks 3D modelling, hardware and maintenance labs, and portfolio building. Produced formal LaTeX lab reports, LinkedIn content, and a Medium blog post from the experience.</p>
+          <div class="tags">
+            <span class="tag">SolidWorks</span><span class="tag">Hardware Repair</span>
+            <span class="tag">Technical Documentation</span><span class="tag">Professional Portfolio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">Completed<br>2024</div>
+        <div>
+          <p class="edu-badge">A-Level · Secondary</p>
+          <p class="edu-degree">Uganda Advanced Certificate of Education (UACE)</p>
+          <p class="edu-school">Seeta High School, Uganda</p>
+          <p class="edu-desc">Completed Uganda Advanced Certificate of Education, qualifying for university admission into the BSc Computer Science programme at UCU.</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">Completed<br>2022</div>
+        <div>
+          <p class="edu-badge">O-Level · Secondary</p>
+          <p class="edu-degree">Uganda Certificate of Education (UCE)</p>
+          <p class="edu-school">St. Mary's College Kisubi, Uganda</p>
+          <p class="edu-desc">Foundation in sciences, mathematics, and ICT. The groundwork that led to pursuing Computer Science at university level.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- SKILLS -->
+<div class="wrap">
+  <div id="skills" class="sec">
+    <p class="sec-eye">Competencies</p>
+    <h2 class="sec-title">Skills</h2>
+    <p class="sec-sub">Built through coursework, real Cisco labs, workshops, and independent practice.</p>
+    <div class="skills-grid">
+      <div class="sk-card">
+        <div class="sk-icon"></div>
+        <div class="sk-title">Network Engineering</div>
+        <div class="sk-desc">VLAN design, routing protocols, DHCP, SSH — on real Cisco hardware and Packet Tracer.</div>
+        <div class="sk-tags"><span class="sk-tag">Cisco IOS</span><span class="sk-tag">VLANs</span><span class="sk-tag">OSPF</span><span class="sk-tag">DHCP</span><span class="sk-tag">SSH</span><span class="sk-tag">Packet Tracer</span><span class="sk-tag">LAN/WAN</span></div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon"></div>
+        <div class="sk-title">Programming</div>
+        <div class="sk-desc">Python OOP and DSA implemented from scratch. Front-end for documentation and study tools.</div>
+        <div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">OOP</span><span class="sk-tag">BST</span><span class="sk-tag">Recursion</span><span class="sk-tag">Algorithms</span><span class="sk-tag">HTML/CSS</span></div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon"></div>
+        <div class="sk-title">Database Design</div>
+        <div class="sk-desc">Relational database design, normalisation, and schema creation from coursework.</div>
+        <div class="sk-tags"><span class="sk-tag">SQL</span><span class="sk-tag">ERD</span><span class="sk-tag">Normalisation</span><span class="sk-tag">Schema Design</span></div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🔧</div>
+        <div class="sk-title">Systems & Hardware</div>
+        <div class="sk-desc">Hardware repair, OS installation, system configuration, and 3D CAD modelling.</div>
+        <div class="sk-tags"><span class="sk-tag">Windows 11</span><span class="sk-tag">Hardware Repair</span><span class="sk-tag">SolidWorks</span><span class="sk-tag">System Setup</span></div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon"></div>
+        <div class="sk-title">Technical Documentation</div>
+        <div class="sk-desc">Formal academic and technical writing using professional typesetting and diagram tools.</div>
+        <div class="sk-tags"><span class="sk-tag">LaTeX</span><span class="sk-tag">Draw.io</span><span class="sk-tag">Word</span><span class="sk-tag">Network Diagrams</span><span class="sk-tag">Reports</span></div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon"></div>
+        <div class="sk-title">Professional Writing</div>
+        <div class="sk-desc">Technical and reflective content online  LinkedIn posts, Medium articles, academic essays.</div>
+        <div class="sk-tags"><span class="sk-tag">LinkedIn</span><span class="sk-tag">Medium</span><span class="sk-tag">GitHub</span><span class="sk-tag">Technical Blogs</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- PROJECTS -->
+<div class="wrap">
+  <div id="projects" class="sec">
+    <p class="sec-eye">Work</p>
+    <h2 class="sec-title">Projects</h2>
+    <p class="sec-sub">Hands-on work from coursework, labs, and workshops  all implemented and properly documented.</p>
+    <div class="proj-grid">
+
+      <div class="proj-card feat">
+        <div>
+          <p class="proj-cat">⭐ Featured · Networking · Packet Tracer</p>
+          <h3 class="proj-name">Hub-and-Spoke WAN Network Design</h3>
+          <p class="proj-desc">Designed and implemented a complete hub-and-spoke WAN topology in Cisco Packet Tracer using OSPF dynamic routing and VLSM addressing for efficient IP allocation across multiple branches. Produced a formal LaTeX technical report and professional Draw.io network diagrams as deliverables. Demonstrates understanding of enterprise-level WAN architecture.</p>
+          <div class="proj-stack"><span class="ps">OSPF</span><span class="ps">VLSM</span><span class="ps">Packet Tracer</span><span class="ps">LaTeX</span><span class="ps">Draw.io</span><span class="ps">WAN Design</span></div>
+        </div>
+        <div class="feat-viz">
+          <div class="fv-row"><span class="fv-d fv-g"></span> HQ Router — OSPF Area 0</div>
+          <div class="fv-row"><span class="fv-d fv-p"></span> Branch 1 — 192.168.1.0/26</div>
+          <div class="fv-row"><span class="fv-d fv-p"></span> Branch 2 — 192.168.1.64/26</div>
+          <div class="fv-row"><span class="fv-d fv-p"></span> Branch 3 — 192.168.1.128/26</div>
+          <div class="fv-row"><span class="fv-d fv-dim"></span> VLSM subnetting applied</div>
+          <div class="fv-row"><span class="fv-d fv-g"></span> Full convergence ✓</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-cat">Networking · Cisco Hardware · Lab</p>
+        <h3 class="proj-name">Enterprise Network Lab — Rack 6</h3>
+        <p class="proj-desc">Configured a complete Cisco router and switch environment on real rack hardware. Covered VLANs, inter-VLAN routing via router-on-a-stick, DHCP, OSPF, and SSH remote access — entirely from the CLI.</p>
+        <div class="proj-stack"><span class="ps">Cisco IOS</span><span class="ps">VLANs</span><span class="ps">DHCP</span><span class="ps">OSPF</span><span class="ps">SSH</span></div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-cat">Software · Python · DSA</p>
+        <h3 class="proj-name">Campus Music Chart System</h3>
+        <p class="proj-desc">Built a music ranking system combining a Binary Search Tree and recursion in Python. Presented with a formal slide deck and technical script covering algorithm design and time complexity analysis.</p>
+        <div class="proj-stack"><span class="ps">Python</span><span class="ps">BST</span><span class="ps">Recursion</span><span class="ps">OOP</span><span class="ps">Complexity Analysis</span></div>
+      </div>
+
+
+      <div class="proj-card">
+        <p class="proj-cat">CAD · Workshop · Trinity 2026</p>
+        <h3 class="proj-name">SolidWorks 3D Modelling</h3>
+        <p class="proj-desc">Attended a professional SolidWorks workshop during Trinity 2026. Produced a formal LaTeX lab report, a LinkedIn post, and a Medium blog article documenting the technical experience.</p>
+        <div class="proj-stack"><span class="ps">SolidWorks</span><span class="ps">3D Modelling</span><span class="ps">LaTeX</span><span class="ps">Technical Writing</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- CERTIFICATIONS -->
+<div class="wrap">
+  <div id="roadmap" class="sec">
+    <p class="sec-eye">Professional Development</p>
+    <h2 class="sec-title">Certification Roadmap</h2>
+    <p class="sec-sub">A structured 3-year plan to build industry-recognised credentials alongside my degree.</p>
+    <div class="cert-grid">
+      <div class="cert-card c1">
+        <p class="cert-phase">Phase 1</p>
+        <p class="cert-title">Foundation</p>
+        <p class="cert-time">Year 1 — Now</p>
+        <div class="cert-items">
+          <div class="ci">CompTIA A+</div>
+          <div class="ci">Google IT Support Certificate</div>
+          <div class="ci">GitHub Fundamentals</div>
+        </div>
+      </div>
+      <div class="cert-card c2">
+        <p class="cert-phase">Phase 2</p>
+        <p class="cert-title">Specialisation</p>
+        <p class="cert-time">Year 2 — 2026/27</p>
+        <div class="cert-items">
+          <div class="ci">Choose track: Networking, Security, or Cloud</div>
+          <div class="ci">Build focused project portfolio</div>
+          <div class="ci">Industry exposure</div>
+        </div>
+      </div>
+      <div class="cert-card c3">
+        <p class="cert-phase">Phase 3</p>
+        <p class="cert-title">Mid-Level Credential</p>
+        <p class="cert-time">Year 3 — By Graduation</p>
+        <div class="cert-items">
+          <div class="ci">CCNA · or · CEH · or · AWS SAA</div>
+          <div class="ci">First-class honours degree</div>
+          <div class="ci">Industry-ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- INTERESTS -->
+<div class="wrap">
+  <div id="interests" class="sec">
+    <p class="sec-eye">Beyond Academics</p>
+    <h2 class="sec-title">Interests</h2>
+    <p class="sec-sub">Discipline and curiosity show up in everything not just in front of a screen.</p>
+    <div class="int-grid">
+      <div class="int-card">
+        <div class="int-icon"></div>
+        <div class="int-title">Football</div>
+        <div class="int-desc">Competitive player and student of the game. I love watching and analysing the sport.Chelsea FC supporter.</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon"></div>
+        <div class="int-title">Gaming</div>
+        <div class="int-desc">Football Manager, FC 26, NBA 2K. I play strategically always looking for systems, patterns, and edges.</div>
+      </div>
+     
+      
+      <div class="int-card">
+        <div class="int-icon"></div>
+        <div class="int-title">Music</div>
+        <div class="int-desc">A constant presence. I listen broadly and deliberately. Music makes things brighter.</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon"></div>
+        <div class="int-title">Community & Children</div>
+        <div class="int-desc">I enjoy working with children and helping where I can.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- CONTACT -->
+<div class="wrap">
+  <div id="contact" class="sec">
+    <p class="sec-eye">Connect</p>
+    <h2 class="sec-title">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>I'm open to  collaborations on technical projects, and conversations about networking, software development, or the CS field in general.</p>
+        <p>The best place to reach me is LinkedIn. I'm also publishing technical content on Medium covering networking labs, workshop experiences, and what I'm learning through my degree.</p>
+        <p>Based in Mukono, Uganda · </p>
+      </div>
+      <div class="c-links">
+        <a href="www.linkedin.com/in/louis-marie-atugonza-271144408" target="_blank" class="c-link">
+          <div class="c-ico">💼</div>
+          <div class="c-info"><strong>LinkedIn</strong><span>linkedin</span></div>
+        </a>
+        <a href="https://github.com/LMA74" target="_blank" class="c-link">
+          <div class="c-ico">🐙</div>
+          <div class="c-info"><strong>GitHub</strong><span>github.com/LMA74</span></div>
+        </a>
+        <a href="atugonzalouis@gmail.com" class="c-link">
+          <div class="c-ico">✉️</div>
+          <div class="c-info"><strong>Email</strong><span>atugonzalouis@gmail.com</span></div>
+        </a>
+        <a href="https://medium.com/@atugonzalouis" target="_blank" class="c-link">
+          <div class="c-ico">✍️</div>
+          <div class="c-info"><strong>Medium</strong><span>Technical writing & reflections</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 · Atugonza Louis-Marie</span>
+  <span>BSc Computer Science · Uganda Christian University</span>
+</footer>
+
+</body>
+</html>
